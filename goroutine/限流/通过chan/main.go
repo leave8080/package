@@ -25,7 +25,8 @@ func run(task_id, sleeptime int, ch chan string) {
 }
 
 func main() {
-	input := []int{3, 2, 1}
+	//input := []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
+	input := []int{1, 1, 1, 1, 1, 1}
 	timeout := 2
 	chLimit := make(chan bool, 1)
 	chs := make([]chan string, len(input))
