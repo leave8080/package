@@ -18,3 +18,11 @@ func main() {
 	fmt.Println(&data[2])
 	fmt.Println(reflect.TypeOf(data))
 }
+
+func main1() {
+	s := []int{0, 1, 2, 3}
+	//p := &s[2] // *int, 获取底层数组元素指针。
+	//*p += 100
+	s[2] = 100
+	fmt.Println(s)
+}
