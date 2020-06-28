@@ -76,11 +76,10 @@ import "fmt"
 
 func main() {
 	fd := (int)(C.Serive_open())
-	if fd == -1{
+	if fd == -1 {
 		fmt.Println("open err")
 		return
 	}
 	C.ReadData(C.int(fd))
-
 
 }

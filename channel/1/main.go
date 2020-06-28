@@ -15,9 +15,13 @@ func main() {
 	go worker(ch)
 	println("1")
 	// Send a message to a worker.
+	//select {}
+
 	ch <- struct{}{}
 	println("2")
 	// Receive a message from the worker.
+	//ch <- struct{}{}
+	//close(ch)
 	<-ch
 	println("roger")
 	// Output:
