@@ -1,13 +1,11 @@
 package main
 
-import (
-	"github.com/leave8080/package/test/rr"
-
-	"fmt"
-	"os"
-)
+var ss bool
 
 func main() {
-	fmt.Println(os.Environ())
-	rr.EE()
+	//for{
+	//	fmt.Println(rand.Intn(4))
+	//	time.Sleep(time.Second)
+	//}
+
 }

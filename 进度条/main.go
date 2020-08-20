@@ -47,8 +47,8 @@ func (bar *Bar) Finish() {
 }
 func main() {
 	var bar Bar
-	bar.NewOption(0, 100)
-	for i := 0; i <= 100; i++ {
+	bar.NewOption(0, 1000)
+	for i := 0; i <= 1000; i++ {
 		time.Sleep(100 * time.Millisecond)
 		bar.Play(int64(i))
 	}

@@ -24,6 +24,7 @@ func f() {
 				select {
 
 				case <-t1.C:
+
 					fmt.Println("ssssssssssssssssssssss")
 					return
 				default:
