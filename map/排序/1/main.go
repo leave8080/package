@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"sort"
 )
 
@@ -24,4 +25,11 @@ func main() {
 		fmt.Println(v, str[v])
 	}
 
+}
+
+func main1() {
+	ss := []int{1, 2, 3, 8, 6}
+	fmt.Println(reflect.TypeOf(ss))
+	sort.Ints(ss)
+	fmt.Println(ss)
 }
