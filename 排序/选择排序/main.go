@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	var arr = []int{19, 28, 17, 5, 13, 4, 6, 7, 9, 3, 10}
@@ -22,6 +24,22 @@ func selectAscendingSort(ss []int) {
 		}
 	}
 	fmt.Println(ss)
+}
+func test2(ss []int) {
+
+	l := len(ss)
+
+	for i := 0; i < l-1; i++ {
+		k := i
+		for j := i + 1; j < l; j++ {
+			if ss[k] > ss[j] {
+				k = j
+			}
+		}
+		if k != i {
+			ss[i], ss[k] = ss[k], ss[i]
+		}
+	}
 }
 
 /*

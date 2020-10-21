@@ -43,5 +43,16 @@ func main() {
 	fmt.Printf("int64 size: %d, align: %d, offset: %d\n", unsafe.Sizeof(part1.d), unsafe.Alignof(part1.d), unsafe.Offsetof(part1.d))
 	fmt.Printf("byte size: %d, align: %d, offset: %d\n", unsafe.Sizeof(part1.e), unsafe.Alignof(part1.e), unsafe.Offsetof(part1.e))
 	fmt.Printf("part1 size: %d, align: %d\n", unsafe.Sizeof(part1), unsafe.Alignof(part1))
+	fmt.Println(unsafe.Sizeof(struct {
+		i8  int8
+		i32 string
+		i16 int16
+	}{}),
+		unsafe.Alignof(struct {
+			i8  int8
+			i32 string
+			i16 int16
+		}{}),
+	)
 
 }

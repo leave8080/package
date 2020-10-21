@@ -2,23 +2,14 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
-	ch1 := make(chan int)
-	go pump(ch1) // pump hangs
-	for {
-
-		fmt.Println(<-ch1)
-
-	}
-
-	// prints only 1
-
-}
-
-func pump(ch chan int) {
-	for i := 1; ; i++ {
-		ch <- i
-	}
+	fmt.Println(time.Now().Unix())
+	fmt.Println(time.Now().Unix() - 600)
+	fmt.Println(string(byte(52)))
+	fmt.Println(string(byte(19)))
+	var i = make([]int, 0)
+	fmt.Println(i)
 }

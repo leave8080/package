@@ -1,4 +1,4 @@
-package pool
+package _
 
 type GoPool struct {
 	MaxLimit int

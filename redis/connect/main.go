@@ -17,7 +17,7 @@ func init() {
 		Wait:            false,
 		MaxConnLifetime: 0,
 		Dial: func() (redis.Conn, error) {
-			return redis.Dial("tcp", "192.168.107.220:6379")
+			return redis.Dial("tcp", "192.168.1.100:6379")
 		},
 	}
 }
@@ -34,18 +34,20 @@ func main() {
 		return
 	}
 	fmt.Println("ping ===>", ss)
-	_, err1 := conn.Do("HMSet", "user1", "name", "beijing", "address", "beijing")
-	if err1 != nil {
-		fmt.Println("HMSet err=", err1)
-		return
-	}
-	_, err3 := conn.Do("HMSet", "user2", "name", "wuhan", "address", "wuhan")
-	if err3 != nil {
-		fmt.Println("HMSet err=", err3)
-		return
-	}
+	//_, err1 := conn.Do("HMSet", "nat2", "name", "dasda", "address", "beijing", "EX", "10")
+	//if err1 != nil {
+	//	fmt.Println("HMSet err=", err1)
+	//	return
+	//}
+	//_, err3 := conn.Do("HMSet", "user2", "name", "wuhan", "address", "wuhan")
+	//if err3 != nil {
+	//	fmt.Println("HMSet err=", err3)
+	//	return
+	//}
 	//向redis读取数据，返回的r是个空接口
-	r, err2 := redis.Strings(conn.Do("HMGet", "user1", "name", "address"))
+	//r, err2 := redis.Strings(conn.Do("HMGet", "user1", "name", "address"))
+	r, err2 := redis.Strings(conn.Do("HGETALL", "nat2"))
+	//r, err2 := redis.String(conn.Do("keys", "*"))
 	if err2 != nil {
 		fmt.Println("HMGet err=", err2)
 		return
