@@ -1,5 +1,7 @@
 package main
 
+import "github.com/toolkits/sys"
+
 func main() {
 	//v, _ := mem.VirtualMemory()
 	//res, err := cpu.Times(false)
