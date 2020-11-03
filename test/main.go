@@ -2,24 +2,68 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"net/http"
 )
+
+type Student struct {
+	name  string
+	code  int
+	types int
+}
 
 func main() {
 
-	url := "http://gfapi.mlogcn.com/weather/v001/hour?areacode=101010100&hours=1&key=LlB0NRxmWDIyJdavtFPIdh1ws2TdJgls"
-	method := "GET"
-
-	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-
-	if err != nil {
-		fmt.Println(err)
+	s := make([]*Student, 5)
+	s[0] = &Student{name: "qq",
+		code:  5,
+		types: 1,
 	}
-	res, err := client.Do(req)
-	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
-
-	fmt.Println(string(body))
+	s[1] = &Student{name: "qq",
+		code:  2,
+		types: 2,
+	}
+	s[2] = &Student{name: "aa",
+		code:  2,
+		types: 1,
+	}
+	s[3] = &Student{name: "aa",
+		code:  1,
+		types: 2,
+	}
+	s[4] = &Student{name: "sd",
+		code:  2,
+		types: 2,
+	}
+	fmt.Println(s)
+	ret := make(map[string][]int)
+	//for k,v := range s{
+	//	fmt.Println(k,v.name,v.code,v.types)
+	//
+	//	for k,t := range s{
+	//		if v.name == t.name{
+	//			if v.types == 1{
+	//				ret[v.name]=[]int{v.code,t.code}
+	//			}else {
+	//				ret[v.name]=[]int{t.code,v.code}
+	//			}
+	//
+	//		}
+	//	}
+	//}
+	for i := 0; i < len(s); i++ {
+		for j := i + 1; j < len(s)-1; j++ {
+			if s[i].name == s[j].name {
+				fmt.Println(s[i])
+				if s[i].types == 1 {
+					ret[s[i].name] = []int{s[i].code, s[j].code}
+				} else {
+					ret[s[i].name] = []int{s[j].code, s[i].code}
+				}
+			} else {
+				//ret[s[i].name]=[]int{s[i].code}
+			}
+		}
+	}
+	//fmt.Println(ret["qq"])
+	//fmt.Println(ret["aa"])
+	fmt.Println(ret)
 }
