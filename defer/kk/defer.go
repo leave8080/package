@@ -1,6 +1,9 @@
 package kk
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 func Transaction() {
 	//panicked := true
@@ -12,4 +15,11 @@ func Transaction() {
 		fmt.Println("!!!!!")
 	}
 	fmt.Println("####")
+}
+
+func DeferFunc() {
+	defer func() {
+		fmt.Println("defer")
+	}()
+	log.Fatal("fatal")
 }

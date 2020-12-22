@@ -1,84 +1,57 @@
 package main
 
 import (
-	"context"
-	"encoding/json"
-	"io/ioutil"
-	"log"
-	"net/http"
-	"net/url"
-	"time"
+	"fmt"
 )
 
-const (
-	URLSchema            = "http://"
-	URLHost              = "gfapi.mlogcn.com"
-	URLGeopositionSearch = "/function/v001/poi"
-	URLForairy1Hour      = "/air/v001/airhourly"
-	URLWeatherReal       = "/air/v001/pastaqi"
-	URLAirHour           = "/weather/v001/hour"
-)
+// Iterator 声明接口
+type Iterator interface {
+	Iterator(m iterSet) Iter
+}
 
-func GetAirFuture(ctx context.Context, areacode string) (rsp *AirQRsp, err error) {
-	req := make(url.Values)
-	req.Set("key", "W2jhBnzCp7gbb3JUs1gywrmFcLS6hbcZ")
-	req.Set("hours", "25")
-	req.Set("areacode", areacode)
-	req.Set("output_type", "json")
-	param := req.Encode()
+// Iter 迭代器的实现
+type Iter struct {
+	C chan interface{}
+}
 
-	path := URLSchema + URLHost + URLForairy1Hour + "?" + param
-	log.Println("path:", path)
-	method := "GET"
-	client := &http.Client{}
-	Request, err := http.NewRequest(method, path, nil)
-	if err != nil {
-		return nil, err
-	}
-	ress, err := client.Do(Request)
-	if err != nil {
-		return nil, err
-	}
-	defer ress.Body.Close()
-	body, err := ioutil.ReadAll(ress.Body)
-	if err != nil {
-		return nil, err
-	}
-	err = json.Unmarshal(body, &rsp)
-	if err != nil {
-		return nil, err
-	}
-	if rsp.Status == nil {
-		log.Println("dsfsdafsdf")
-	}
-	return rsp, nil
+func newIter(i *iterSet) Iter {
+	iter := Iter{make(chan interface{})}
+
+	go func() {
+		for k := range i.m {
+			iter.C <- k
+		}
+		close(iter.C)
+	}()
+
+	return iter
+}
+
+// 我们自己的set
+type iterSet struct {
+	m map[string]bool
+}
+
+// Add 添加元素
+func (i *iterSet) Add(k string) {
+	i.m[k] = true
+}
+
+// Iterator 返回一个迭代器
+func (i *iterSet) Iterator() Iter {
+	return newIter(i)
 }
 
 func main() {
-	air, err := GetAirFuture(context.Background(), "101090515")
-	if err != nil {
-		log.Println("dasd", err)
+	aSet := iterSet{map[string]bool{}}
+	aSet.Add("hello")
+	aSet.Add("hello")
+	aSet.Add("world")
+	aSet.Add("world")
+
+	iter := aSet.Iterator()
+
+	for v := range iter.C {
+		fmt.Printf("key: %s\n", v.(string))
 	}
-	log.Println(air.Result.AqiHourlyFcst[0].Pm25, err)
 }
-
-type AirQRsp struct {
-	Status *int `json:"status"`
-	Result struct {
-		AqiHourlyFcst []*AqiHourlyFcst `json:"aqi_hourly_fcst"`
-	}
-}
-
-type AqiHourlyFcst struct {
-	Aqi      int     `json:"aqi"`       //实时空气质量指数
-	AqiLevel string  `json:"aqi_level"` //空气质量等级
-	Pm10     int     `json:"pm10"`      //PM10浓度，单位: 微克/立方米
-	Pm25     int     `json:"pm25"`      //PM2.5浓度，单位: 微克/立方米
-	No2      int     `json:"no2"`       //二氧化氮浓度，单位: 微克/立方米
-	So2      int     `json:"so2"`       //二氧化硫浓度，单位: 微克/立方米
-	Co       float32 `json:"co"`        //一氧化碳浓度，单位: 毫克/立方米
-	O3       int     `json:"o3"`        //臭氧浓度，单位: 微克/立方米
-	//DataTime Time    `json:"data_time"` //预报时次
-}
-
-type Time time.Time

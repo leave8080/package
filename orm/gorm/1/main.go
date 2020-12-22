@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/astaxie/beego/logs"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"wj/logs"
 )
 
 var db *gorm.DB
