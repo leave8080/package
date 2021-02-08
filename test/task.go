@@ -1,25 +1,21 @@
 package main
 
-import (
-	"fmt"
-	"github.com/afex/hystrix-go/hystrix"
-	"net/http"
-	"time"
+import "fmt"
+
+type EntryType int32
+
+const (
+	EntryNomal EntryType = 0
+	Entrydada  EntryType = 1
 )
 
-func main() {
-	hystrix.Go("get_baidu", func() error {
-		// talk to other services
-		_, err := http.Get("https://www.baidu.com/")
-		if err != nil {
-			fmt.Println("get error")
-			return err
-		}
-		return nil
-	}, func(err error) error {
-		fmt.Println("get an error, handle it")
-		return nil
-	})
+type Sss struct {
+	Enrt EntryType
+}
 
-	time.Sleep(2 * time.Second) // 调用Go方法就是起了一个goroutine，这里要sleep一下，不然看不到效果
+func main() {
+	s := Sss{Enrt: Entrydada}
+	key := "reee"
+	fmt.Println("key \"" + key + "\" dadad ")
+	fmt.Println(s)
 }
