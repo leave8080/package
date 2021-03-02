@@ -18,4 +18,5 @@ func main() {
 	key := "reee"
 	fmt.Println("key \"" + key + "\" dadad ")
 	fmt.Println(s)
+
 }

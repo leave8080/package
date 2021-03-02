@@ -23,7 +23,7 @@ type RedisConnc struct {
 
 func main() {
 	var err error
-	InitRedis("192.168.1.100:6379", "")
+	InitRedis("192.168.11.34:6379", "123456")
 	c := redisConc.pool.Get()
 	user := User{
 		Name: "test-name",
