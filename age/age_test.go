@@ -6,5 +6,5 @@ import (
 )
 
 func TestGetYearDiffer(t *testing.T) {
-	fmt.Println(GetYearDiffer("1995-08-21", "2021-03-03"))
+	fmt.Println(GetYearDiffer("2020.07.20", "2021.07.20"))
 }

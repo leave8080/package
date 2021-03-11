@@ -1,0 +1,125 @@
+---
+kind: pipeline
+type: docker
+name: vbs9010_app
+
+clone:
+  depth: 1
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: redis
+    pull: if-not-exists
+    image: redis
+    detach: true
+
+  - name: mysql
+    pull: if-not-exists
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "mx_cloud"
+    detach: true
+
+  - name: ci
+    pull: if-not-exists
+    image: golang:1.15
+    environment:
+      GO111MODULE: "on"
+      GOPROXY: "https://goproxy.cn,direct"
+      GOSUMDB: "off"
+      CGO_ENABLED: "0"
+      GOOS: "linux"
+      CI_TEST: "ci"
+      MX_APP_ENV: "ci"
+      MX_JOB_ENV: "ci"
+    commands:
+      - sleep 15  # wait mysql server turn on
+      - go mod tidy
+      - cd app
+      - go test ./...
+      - echo "Build app"
+      - go build -o main cmd/main.go
+      - rm -f main
+    depends_on:
+      - redis
+      - mysql
+
+
+  - name: build-image-dev
+    pull: if-not-exists
+    image: plugins/docker
+    when:
+      branch:
+        - feat/petmarvel_dev
+    environment:
+      CI_TOKEN:
+        from_secret: cibot_token
+    settings:
+      repo: registry-vpc.cn-shanghai.aliyuncs.com/mxcloud/petmarvel_api
+      registry: registry-vpc.cn-shanghai.aliyuncs.com
+      target: vbs9010_app_api
+      build_args_from_env:
+        - CI_TOKEN
+      tags:
+        - petmarvel_latest
+      username:
+        from_secret: aliyun_username
+      password:
+        from_secret: aliyun_password
+
+
+  - name: build-image-pet-prod
+    image: plugins/docker
+    when:
+      branch:
+        - feat/petmarvel
+    environment:
+      CI_TOKEN:
+        from_secret: cibot_token
+    settings:
+      repo: registry-vpc.cn-shanghai.aliyuncs.com/mxcloud/petmarvel_api
+      registry: registry-vpc.cn-shanghai.aliyuncs.com
+      target: vbs9010_app_api
+      dockerfile: Dockerfile.pet
+      build_args_from_env:
+        - CI_TOKEN
+      tags:
+        - petmarvel_prod
+      username:
+        from_secret: aliyun_username
+      password:
+        from_secret: aliyun_password
+
+  - name: build-docker-tag
+    image: plugins/docker
+    when:
+      event: tag
+    environment:
+      CI_TOKEN:
+        from_secret: cibot_token
+    settings:
+      repo: registry-vpc.cn-shanghai.aliyuncs.com/mxcloud/petmarvel_api
+      registry: registry-vpc.cn-shanghai.aliyuncs.com
+      target: vbs9010_app_api
+      build_args_from_env:
+        - CI_TOKEN
+      tags:
+        - ${DRONE_TAG}
+      username:
+        from_secret: aliyun_username
+      password:
+        from_secret: aliyun_password
+
+  - name: notify
+    image: lddsb/drone-dingtalk-message
+    settings:
+      token:
+        from_secret: dingtalk_token
+      type: markdown
+
+
+
