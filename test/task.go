@@ -1,36 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-type Push interface {
-	PushCOde()
-	Fs
-}
-
-type Fs interface {
-}
-type SMs struct {
-}
-type Mob struct {
-}
-
-func (this *SMs) PushCOde() {
-	fmt.Println("sms")
-}
-
-func (this *Mob) PushCOde() {
-	fmt.Println("mob")
-
-}
 func main() {
-	s := &SMs{}
-	m := &Mob{}
-	//var key int
-	key := 1
-	switch key {
-	case 1:
-		s.PushCOde()
-	case 2:
-		m.PushCOde()
-	}
+	const num = 2
+	s := 1609557368 //2021-01-02 11:16:08
+	e := 1619838968 //2021-05-02 11:16:08
+	t := (e - s) / (60 * 60 * 24 * 30 * num)
+	//t := (e - s) / (60 * 60 * 24 * 30)
+	fmt.Println((e - s) / (60 * 60 * 24 * 30))            //月
+	fmt.Println((e - s - t*30*24*3600*num) / (24 * 3600)) //日
+	local := s + t*24*3600*30*num
+	fmt.Println(time.Unix(int64(local), 0).Format("2006-01-02 15:04:05"))
+
 }

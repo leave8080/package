@@ -14,7 +14,7 @@ func main() {
 		{Name: "zhao2", Age: 13},
 		{Name: "zhao3", Age: 14},
 	}
-	for i, stu := range stus {
+	for _, stu := range stus {
 		fmt.Println(&stu.Name)
 		m[stu.Name] = &stu
 	}
@@ -33,5 +33,15 @@ func main() {
 	}
 	for _, v := range m {
 		fmt.Println(v.Name, v.Age)
+	}
+	fmt.Println("////")
+	var s = []int{1, 2, 3}
+	for _, v := range s {
+		fmt.Println(v)
+		for _, j := range s {
+			if j == 1 {
+				continue
+			}
+		}
 	}
 }
