@@ -12,6 +12,14 @@ func main() {
 	stime := int64(1618761600) //4-19
 	Remind(stime, 2)
 	NextRemind(stime, 2)
+	localRemind(1618675200, 1618851600, 2)
+}
+
+func localRemind(stime, Now int64, rate int64) {
+	t := (Now - stime) / (60 * 60 * 24)
+	t = t / rate
+	fmt.Println(stime + t*60*60*24*rate)
+
 }
 
 func Remind(stime int64, rate int64) {
