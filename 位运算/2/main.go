@@ -8,7 +8,7 @@ func main() {
 	//fmt.Printf("%b\r\n", 8)                // 1000
 	//fmt.Printf("%b\r\n", valueAtBit(8, 3)) // 0
 	//fmt.Printf("%b\r\n", valueAtBit(8, 4)) // 1
-	fmt.Println(valueAtBit(8, 8))
+	fmt.Println(valueAtBit(254, 1))
 	//fmt.Printf("\n\n")
 	//ascii()
 	//stringFunc()
