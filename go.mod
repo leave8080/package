@@ -8,6 +8,7 @@ require (
 	github.com/garyburd/redigo v1.6.2
 	github.com/go-co-op/gocron v1.5.0
 	github.com/go-ini/ini v1.62.0
+	github.com/go-redis/redis v6.14.2+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/google/uuid v1.2.0
@@ -16,6 +17,7 @@ require (
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/pkg/errors v0.9.1
+	github.com/remeh/sizedwaitgroup v1.0.0
 	github.com/spf13/viper v1.7.1
 	github.com/toolkits/sys v0.0.0-20170615103026-1f33b217ffaf
 	gofer v1.1.5
