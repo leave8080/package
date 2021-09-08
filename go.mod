@@ -17,11 +17,13 @@ require (
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/pkg/errors v0.9.1
+	github.com/qichengzx/coordtransform v0.0.0-20210828093347-9f6f46c15c35
 	github.com/remeh/sizedwaitgroup v1.0.0
 	github.com/spf13/viper v1.7.1
 	github.com/toolkits/sys v0.0.0-20170615103026-1f33b217ffaf
 	gofer v1.1.5
 	golang.org/x/crypto v0.0.0-20201124201722-c8d3bf9c5392
+	golang.org/x/text v0.3.3
 )
 
 replace gofer v1.1.5 => rd.mxchip.com/iotx/gofer v1.1.5
