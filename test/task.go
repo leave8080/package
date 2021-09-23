@@ -25,4 +25,6 @@ func main() {
 	}
 	fmt.Println("rsp", rsp)
 
+	fmt.Println(980 / 1000)
+
 }

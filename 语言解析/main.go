@@ -2,21 +2,19 @@ package main
 
 import (
 	"fmt"
-	"gofer/pkg/log"
 	"golang.org/x/text/language"
 )
 
 func main() {
-	lang, err := language.Parse("zh-CN")
+
+	lang, err := language.Parse("zh-Hans")
 	if err != nil {
-		log.Error(err)
-		return
+		lang = language.MustParse("zh")
+		err = nil
+	}
+	//fmt.Println(lang.Parent(), language.Und)
+	if lang.Parent() != language.Und {
+		lang = lang.Parent()
 	}
 	fmt.Println(lang.String())
-
-	var (
-		values []interface{}
-	)
-	values = append(values, 1, 2, "dasd")
-	fmt.Println(values)
 }

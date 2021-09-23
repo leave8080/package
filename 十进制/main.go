@@ -29,4 +29,5 @@ func main() {
 		convertToBin(15),
 		convertToBin(0),
 	)
+	fmt.Println(1412320101 & 0xf)
 }
