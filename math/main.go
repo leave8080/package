@@ -19,5 +19,6 @@ func main() {
 	for i := 0; i < int(page); i++ {
 		fmt.Println(i*pagesiez, pagesiez)
 	}
-
+	num2, _ := strconv.ParseFloat(fmt.Sprintf("%.2f", float64(988)/float64(1000)), 64)
+	fmt.Println(num2)
 }

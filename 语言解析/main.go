@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	lang, err := language.Parse("zh-Hans")
+	lang, err := language.Parse("zh-Hans-CN")
 	if err != nil {
 		lang = language.MustParse("zh")
 		err = nil
