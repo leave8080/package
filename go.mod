@@ -21,9 +21,11 @@ require (
 	github.com/remeh/sizedwaitgroup v1.0.0
 	github.com/spf13/viper v1.7.1
 	github.com/toolkits/sys v0.0.0-20170615103026-1f33b217ffaf
+	go.mongodb.org/mongo-driver v1.4.1
 	gofer v1.1.5
 	golang.org/x/crypto v0.0.0-20201124201722-c8d3bf9c5392
 	golang.org/x/text v0.3.3
+	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
 
 replace gofer v1.1.5 => rd.mxchip.com/iotx/gofer v1.1.5

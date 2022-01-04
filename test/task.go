@@ -1,30 +1,41 @@
 package main
 
-import (
-	"fmt"
-	"net/http"
-	"time"
-)
+import "fmt"
 
 func main() {
-	const num = 2
-	s := 1609557368 //2021-01-02 11:16:08
-	e := 1619838968 //2021-05-02 11:16:08
-	t := (e - s) / (60 * 60 * 24 * 30 * num)
-	//t := (e - s) / (60 * 60 * 24 * 30)
-	fmt.Println((e - s) / (60 * 60 * 24 * 30))            //月
-	fmt.Println((e - s - t*30*24*3600*num) / (24 * 3600)) //日
-	local := s + t*24*3600*30*num
-	fmt.Println(time.Unix(int64(local), 0).Format("2006-01-02 15:04:05"))
-
-	rsp, err := http.Get("https://dev-app.api.cloud.mxchip.com/app/v1/ping")
-	if err != nil {
-		fmt.Println("get err", err)
-		//fcLogger.Error("get baidu err",err)
-		//return event,err
+	messNum := 128
+	var messIds []int
+	for i := 0; i < 12; i++ {
+		//if i == 4 {
+		//	continue
+		//}
+		if messNum&1 == 1 {
+			messIds = append(messIds, i)
+		}
+		messNum >>= 1
 	}
-	fmt.Println("rsp", rsp)
+	fmt.Println(messIds)
+	messIds = []int{1, 2, 3, 4, 5, 8}
+	messIds = DeleteSlice(messIds)
+	fmt.Println(messIds)
+}
 
-	fmt.Println(980 / 1000)
-
+func DeleteSlice(a []int) []int {
+	for i := 0; i < len(a); i++ {
+		if a[i] == 8 {
+			a = append(a[:i], a[i+1:]...)
+			i--
+		}
+	}
+	return a
+}
+func DeleteSlice2(a []int) []int {
+	j := 0
+	for _, val := range a {
+		if val == 8 {
+			a[j] = val
+			j++
+		}
+	}
+	return a[:j]
 }
