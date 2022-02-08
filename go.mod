@@ -22,7 +22,7 @@ require (
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/spf13/viper v1.7.1
 	github.com/toolkits/sys v0.0.0-20170615103026-1f33b217ffaf
-	go.mongodb.org/mongo-driver v1.4.1
+	go.mongodb.org/mongo-driver v1.5.1
 	gofer v1.1.5
 	golang.org/x/crypto v0.0.0-20201124201722-c8d3bf9c5392
 	golang.org/x/text v0.3.3
