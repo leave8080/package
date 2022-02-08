@@ -9,4 +9,6 @@ func main() {
 	t := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
 	fmt.Printf("Go launched at %s\n", t.Local())
 
+	ss := time.Now().Add(time.Duration(2) * time.Hour)
+	fmt.Println(ss)
 }
