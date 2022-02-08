@@ -19,6 +19,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/qichengzx/coordtransform v0.0.0-20210828093347-9f6f46c15c35
 	github.com/remeh/sizedwaitgroup v1.0.0
+	github.com/smartystreets/goconvey v1.6.4
 	github.com/spf13/viper v1.7.1
 	github.com/toolkits/sys v0.0.0-20170615103026-1f33b217ffaf
 	go.mongodb.org/mongo-driver v1.4.1
