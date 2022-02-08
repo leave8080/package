@@ -11,4 +11,5 @@ func main() {
 	log.Println(stamp.Unix())
 
 	log.Println(int32(time.Now().Unix() + int64(32400)))
+
 }
