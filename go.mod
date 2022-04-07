@@ -1,6 +1,6 @@
 module github.com/leave8080/package
 
-go 1.15
+go 1.18
 
 require (
 	github.com/astaxie/beego v1.12.3
